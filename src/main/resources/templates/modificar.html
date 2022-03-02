@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaft.org" 
+      xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>Datos de la persona</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+          <!-- mostrar etiquetas de otra paguina  que seria la planmtilla atravez de thymeleaft -->
+        <header th:replace="plantilla/plantilla :: header"></header>
+        
+        <h2>[[#{persona.formulario}]]</h2>
+        <a th:href="@{/}">[[#{accion.regresar}]]</a>
+        <br/>
+        <form th:action="@{/guardar}" method="post" th:object="${persona}">
+            <!-- enviamos un input oculto con el id de la persona para que al editar una persona tenga el id-->
+            <input type="hidden" name="idPersona" th:field="*{idPersona}"/>
+
+            <label for="nombre">[[#{persona.nombre}]] </label>
+            <input type="text" name="nombre" th:field="*{nombre}"/>
+            <!-- preguntamos si el campo  de nombre contiene errores  -->
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error del nombre</span>
+            <br/>
+
+            <label for="apellido">[[#{persona.apellido}]]</label>
+            <input type="text" name="apellido" th:field="*{apellido}"/>
+            <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error Nombre</span>
+            <br/>
+            <label for="email">[[#{persona.email}]]</label>
+            <input type="text" name="email" th:field="*{email}"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error Email</span>
+
+            <br/>
+            <label for="telefono">[[#{persona.telefono}]]</label>
+            <input type="tel" name="telefono" th:field="*{telefono}"/><!--th:field selescciona el atributo de persona que seria telefono -->
+            <input type="submit" name="guardar" th:value="#{accion.guardar}"/>
+        </form>
+        
+          <!-- mostrar etiquetas de otra paguina  que seria la planmtilla atravez de thymeleaft -->
+        <footer th:replace="plantilla/plantilla :: footer"></footer>
+        
+        
+    </body>
+</html>

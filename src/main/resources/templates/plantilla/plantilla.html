@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaft.com">
+    <head>
+        <title>plantilla</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <!-- le mandamos el mje atravez del template y se muestra el mje que esta en  messages.properties-->
+            <h1 th:text="#{plantilla.titutlo}">Titulo</h1>
+        </header>
+
+        <footer th:fragment="footer">
+            <div>
+                <br/>
+                <a th:href="@{/(lang=es)}">ES</a>|
+                <a th:href="@{/(lang=en)}">EN</a>|
+                <!-- le mandamos el mje atravez del template y se muestra el mje que esta en  messages.properties-->
+                <span> [[#{plantilla.pie-paguina}]]<a href="https://www.linkedin.com/feed/" target="_blank">Linkeding.com</a></span>
+               
+                <form method="POST" th:action="@{/logout}">
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                </form><!-- para que Spring reconosca que queremos salir de aplicacion se usa logout y cierre  la sesion -->
+            </div>
+
+        </footer>
+
+    </body>
+</html>

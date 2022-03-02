@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org./1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <!-- mostrar etiquetas de otra pagina  que seria la planmtilla atravez de thymeleaft -->
+        <header th:replace="plantilla/plantilla :: header"></header>
+       
+        <a th:href="@{/agregar}" >[[#{persona.crear}]]</a><!-- agregamso el padd agregar encontrolador inicio -->
+        <div th:if="${personas != null and !personas.empty}"><!-- !empty qeu sea diferente vacia -->
+            <table border="1">
+                <tr>
+                    <th>[[#{persona.nombre}]]</th>
+                    <th>[[#{persona.apellido}]]</th>
+                    <th>[[#{persona.email}]]</th>
+                    <th>[[#{persona.telefono}]]</th>
+                  <th>[[#{accion.editar}]]</th>
+                <th>[[#{accion.eliminar}]]</th>
+                </tr>
+                <tr th:each="persona:${personas}">
+                    <td th:text="${persona.nombre}">Mostrar Nombre</td>
+                    <td th:text="${persona.apellido}">Mostrar Apellido</td>
+                    <td th:text="${persona.email}">Mostrar Email</td>
+                    <td th:text="${persona.telefono}">Mostrar Teléfono</td>
+                    <!-- a editar le agregamos el id de la persona  -->
+                    <!-- a editar le agregamos el id de la persona ="@{/editar/} + ${persona.idPersona}"   -->
+                    <td><a th:href="@{/editar/} + ${persona.idPersona}"/>[[#{accion.editar}]]</td>
+                    <!-- otra forma de pasarle id de la persona es  el ejeplo de eliminar en el ejeplo de editar hace la misma funcion pero esta es otra forma -->
+                    <!-- en en controladorInicio hat que podificar el getMappign  -->
+                    <td><a th:href="@{/eliminar(idPersona=${persona.idPersona})}"/>[[#{accion.eliminar}]]</td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${personas == null or personas.empty}">
+            [[#{persona.lista-vacia}]]
+        </div>
+          <!-- mostrar etiquetas de otra pagina  que seria la planmtilla atravez de thymeleaft -->
+        <footer th:replace="plantilla/plantilla :: footer"></footer>
+
+    </body>
+</html>
